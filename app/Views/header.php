@@ -62,9 +62,9 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url() . 'dashboard' ?>">
+                <a class="nav-link" href="<?php echo base_url() . 'home' ?>">
                     <i class="bi bi-grid"></i>
-                    <span>Dashboard</span>
+                    <span>Attendance</span>
                 </a>
             </li><!-- End Dashboard Nav -->
 
@@ -109,11 +109,11 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Dashboard</h1>
+            <h1>RFID Attendance System</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="<?php echo base_url() . '/dashboard' ?>">Home</a></li>
-                    <li class="breadcrumb-item active">Dashboard</li>
+                    <li class="breadcrumb-item"><a href="<?php echo base_url() . 'home' ?>">Home</a></li>
+                    <li class="breadcrumb-item active">Attendance</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->

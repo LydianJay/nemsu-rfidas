@@ -27,9 +27,8 @@ class Login extends BaseController
             return redirect()->to(site_url(''));
         }
         else {
-            session()->set('adminID', $result[0]->admin_id);
-            // return redirect()->to(site_url('dashboard'));
-            echo 'login success!';
+            session()->set('adminID', $result[0]->id);
+            return redirect()->to(site_url('home'));
         }
     }
 

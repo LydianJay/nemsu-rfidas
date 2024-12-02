@@ -57,6 +57,7 @@ abstract class BaseController extends Controller
         $this->session = \Config\Services::session();
         
         $this->data['app_title']        = 'NEMSU-RFIDAS';
+        $this->data['company_name']     = 'NEMSU-RFIDAS';
     }
 
 
