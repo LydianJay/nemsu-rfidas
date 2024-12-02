@@ -8,7 +8,7 @@ class Home extends BaseController
 
     public function __construct() 
     {
-        $this->private_data['table_head']  = ['Serial Num', 'First', 'Middle', 'Last', 'Gender', 'Course', 'NSTP'];
+        $this->private_data['table_head']  = ['RFID', 'First', 'Middle', 'Last', 'Gender', 'Course', 'NSTP'];
     }
 
 
