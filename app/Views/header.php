@@ -69,9 +69,9 @@
             </li><!-- End Dashboard Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+                <!-- <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-menu-button-wide"></i><span>Database</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
+                </a> -->
                 <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
                         <a href="<?php echo base_url() . 'database/attendance' ?>">
@@ -86,7 +86,7 @@
                 </ul>
             </li><!-- End Components Nav -->
 
-          
+
 
 
 
@@ -94,7 +94,7 @@
             <li class="nav-heading">Admin</li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="users-profile.html">
+                <a class="nav-link collapsed" href="<?php echo base_url() . 'indev' ?>">
                     <i class="bi bi-person"></i>
                     <span>Settings</span>
                 </a>
@@ -110,6 +110,7 @@
 
         <div class="pagetitle">
             <h1>RFID Attendance System</h1>
+            
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="<?php echo base_url() . 'home' ?>">Home</a></li>
