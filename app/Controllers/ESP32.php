@@ -38,8 +38,9 @@ class ESP32 extends BaseController
 
 
         if($isValid[0]->rfid <= 0)  {
-            return $this->response->setJSON(['status' => -1, 'msg' => 'Unregistered']);
 
+            return $this->response->setJSON(['status' => -1, 'msg' => 'Unregistered ID']);
+        
         }
 
 
@@ -85,7 +86,7 @@ class ESP32 extends BaseController
             ->setJSON(
                 [
                     'status' => 'OK', 
-                    'msg' => $type == 0 ? 'In' : 'Out'
+                    'msg' => $type == 0 ? 'Time-Out' : 'Time-In'
                 ]
             );
         }
@@ -94,7 +95,7 @@ class ESP32 extends BaseController
             ->setJSON(
                 [
                     'status' => 'OK',
-                    'msg' => 'Already'
+                    'msg' => 'Already Time-Out'
                 ]
             );        
         }
