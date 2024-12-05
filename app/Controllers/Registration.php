@@ -55,6 +55,23 @@ class Registration extends BaseController
         echo view('footer');
     }
 
+    public function userinfo($rfid)
+    {
+
+        $this->private_data['student'] = $this->db->table('students')
+        ->where('rfid', $rfid)
+        ->get()
+        ->getResult()[0];
+
+
+        
+
+        $this->data['index']    = 1;
+        echo view('header', $this->data);
+        echo view('registration/info', $this->private_data);
+        echo view('footer');
+    }
+
     public function register()
     {
         $postmap = [

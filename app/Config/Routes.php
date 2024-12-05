@@ -22,7 +22,8 @@ $routes->post('/insert', 'ESP32::insert');
 // $routes->get('/insert', 'ESP32::insert');
 
 
-// ============= Registration ==================
+// ============= Students ==================
 $routes->get('/registration',           'Registration::index');
 $routes->get('/registration/form',      'Registration::form');
-$routes->post('/register',               'Registration::register');
+$routes->post('/register',              'Registration::register');
+$routes->get('/userinfo/(:num)',        'Registration::userinfo/$1');

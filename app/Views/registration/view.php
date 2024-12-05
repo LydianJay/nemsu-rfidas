@@ -14,7 +14,7 @@
                     <tbody>
 
                         <?php foreach ($data as $d) { ?>
-                            <tr>
+                            <tr class="clickable" onclick="window.location.href=`<?php echo site_url('userinfo') . '/' . $d->rfid; ?>`;">
                                 <th> <?php echo strtoupper(dechex($d->rfid)) ?> </th>
                                 <th> <?php echo $d->fname ?> </th>
                                 <th> <?php echo $d->mname ?> </th>

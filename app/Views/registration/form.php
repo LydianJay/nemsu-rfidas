@@ -92,7 +92,6 @@
                                         <option value="<?php echo chr($i) ?>"><?php echo chr($i) ?></option>
                                     <?php  } ?>
 
-
                                 </select>
                                 <label for="floatingSelect">Section</label>
                             </div>
@@ -104,7 +103,7 @@
                     <div class="row mt-3">
                         <div class="col-6 ">
                             <div class="form-floating mb-3">
-                                <input type="number" class="form-control" id="floatingInput" name="rfid">
+                                <input type="number" class="form-control" id="floatingInput" name="rfid" required>
                                 <label for="floatingInput">RFID</label>
                             </div>
                         </div>
@@ -113,7 +112,7 @@
                         <div class="col-6">
                             <label for="inputDate" class="col-sm-2 col-form-label">Birthdate</label>
                             <div class="col-sm-10">
-                                <input type="date" class="form-control" name="birthdate">
+                                <input type="date" class="form-control" name="birthdate" required>
                             </div>
                         </div>
 
@@ -122,7 +121,6 @@
                     <div class="row mt-5">
                         <div class="d-flex flex-row justify-content-center">
                             <button class="btn-sm btn btn-primary p-2">Register</button>
-
                         </div>
                     </div>
                 </form>

@@ -30,6 +30,41 @@
     <!-- html2pdf -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+
+    <style>
+        tr.clickable {
+            cursor: pointer;
+        }
+
+
+        tr.clickable:hover {
+            background-color: var(--bs-gray-300);
+            transition: background-color 0.525s ease;
+        }
+
+
+        tr.clickable:hover td {
+            color: var(--bs-gray-800);
+            font-weight: bold;
+        }
+
+        td.clickable {
+            cursor: pointer;
+        }
+
+
+        td.clickable:hover {
+            background-color: var(--bs-gray-300);
+            transition: background-color 0.525s ease;
+        }
+
+
+        td.clickable:hover td {
+            color: var(--bs-gray-800);
+            font-weight: bold;
+        }
+    </style>
+
     <!-- =======================================================
   * Template Name: NiceAdmin
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
