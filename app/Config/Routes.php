@@ -19,4 +19,4 @@ $routes->get('/indev', 'Maintainance::index');
 
 // ESP32
 $routes->post('/insert', 'ESP32::insert');
-$routes->get('/insert', 'ESP32::index');
+// $routes->get('/insert', 'ESP32::insert');

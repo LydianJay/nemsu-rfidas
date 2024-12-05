@@ -24,20 +24,19 @@ class ESP32 extends BaseController
         $date   = date('m-d-Y');
         $splite = explode('-', $date);
         $time   = date('H:i');
-        // $q2     = "SELECT COUNT(rfid) as n FROM attendance WHERE rfid = '$data->rfid' AND day = '$day' AND month = '$month' AND year = '$year' ";
         
 
         $month  = $splite[0];
         $day    = $splite[1];
         $year   = $splite[2];
 
-        $start_time     = date("H:i", "07:20"); 
-        $end_time       = date("H:i", "11:00"); 
+        $start_time     = "07:20"; 
+        $end_time       = "11:00"; 
         $current_time   = date('H:i');
 
 
-        $afternoon_start_time     = date("H:i","01:00");
-        $afternoon_end_time       = date("H:i","16:00");
+        $afternoon_start_time     = "01:00";
+        $afternoon_end_time       = "16:00";
 
         $isValid = $this->db->table('students')
         ->selectCount('rfid')
