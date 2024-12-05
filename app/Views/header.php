@@ -136,7 +136,7 @@
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="<?php echo base_url() . 'indev' ?>">
-                    <i class="bi bi-person"></i>
+                    <i class="bi bi-gear-fill"></i>
                     <span>Settings</span>
                 </a>
             </li><!-- End Profile Page Nav -->

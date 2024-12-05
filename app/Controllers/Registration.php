@@ -58,14 +58,28 @@ class Registration extends BaseController
     public function userinfo($rfid)
     {
 
-        $this->private_data['student'] = $this->db->table('students')
+        $studentInfo = $this->db->table('students')
         ->where('rfid', $rfid)
         ->get()
         ->getResult()[0];
 
 
-        
+        $course = $this->db->table('course')
+        ->where('id', $studentInfo->courseID)
+        ->get()
+        ->getResult()[0];
 
+        $nstp = $this->db->table('nstp_course')
+        ->where('id', $studentInfo->nstpID)
+        ->get()
+        ->getResult()[0];
+
+
+        $this->private_data['student']      = $studentInfo;
+        $this->private_data['nstp']         = $nstp;
+        $this->private_data['course']       = $course;
+        
+        
         $this->data['index']    = 1;
         echo view('header', $this->data);
         echo view('registration/info', $this->private_data);
