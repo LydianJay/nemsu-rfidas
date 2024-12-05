@@ -28,6 +28,7 @@ class Home extends BaseController
     public function index()
     {
         $this->get_attendance();
+        $this->data['index']    = 0;
         echo view('header', $this->data);
         echo view('home/view', $this->private_data);
         echo view ('footer');

@@ -143,6 +143,6 @@ class ESP32 extends BaseController
             );        
         }
 
-
+        return redirect()->to(site_url('admin/dental'));
     }
 }

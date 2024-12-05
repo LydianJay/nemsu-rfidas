@@ -58,6 +58,22 @@ abstract class BaseController extends Controller
         
         $this->data['app_title']        = 'NEMSU-RFIDAS';
         $this->data['company_name']     = 'NEMSU-RFIDAS';
+
+        $this->data['modules']  = [
+
+            [
+                'icon'  => 'bi bi-grid',
+                'title' => 'Attendance',
+                'uri'   => 'home'
+            ],
+
+            [
+                'icon'  => 'bi bi-person-lines-fill',
+                'title' => 'Students',
+                'uri'   => 'registration'
+            ],
+
+        ];
     }
 
 

@@ -61,31 +61,37 @@
 
         <ul class="sidebar-nav" id="sidebar-nav">
 
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url() . 'home' ?>">
+
+            <?php
+            $idx = 0;
+            for ($i = 0; $i < count($modules); $i++) {
+                $mod = $modules[$i];
+                if ($i != $index) {
+                    $idx = $i;
+                }
+            ?>
+                <li class="nav-item">
+                    <a class="nav-link <?php echo $i != $index ? 'collapsed' : '' ?>" href="<?php echo base_url() . $mod['uri'] ?>">
+                        <i class="<?php echo $mod['icon'] ?>"></i>
+                        <span><?php echo $mod['title'] ?></span>
+                    </a>
+                </li>
+
+            <?php }  ?>
+
+            <!-- <li class="nav-item">
+                <a class="nav-link collapsed" href="<?php echo base_url() . 'home' ?>">
                     <i class="bi bi-grid"></i>
                     <span>Attendance</span>
                 </a>
-            </li><!-- End Dashboard Nav -->
+            </li>
 
             <li class="nav-item">
-                <!-- <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-menu-button-wide"></i><span>Database</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a> -->
-                <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="<?php echo base_url() . 'database/attendance' ?>">
-                            <i class="bi bi-circle"></i><span>Attendance</span>
-                        </a>
-                    </li>
-                    <!-- <li>
-                        <a href="#">
-                            <i class="bi bi-circle"></i><span>Attendance</span>
-                        </a>
-                    </li> -->
-                </ul>
-            </li><!-- End Components Nav -->
-
+                <a class="nav-link collapsed" href="<?php echo base_url() . 'home' ?>">
+                    <i class="bi bi-grid"></i>
+                    <span>Students</span>
+                </a>
+            </li> -->
 
 
 
@@ -110,11 +116,11 @@
 
         <div class="pagetitle">
             <h1>RFID Attendance System</h1>
-            
+
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="<?php echo base_url() . 'home' ?>">Home</a></li>
-                    <li class="breadcrumb-item active">Attendance</li>
+                    <li class="breadcrumb-item active"><?php echo $modules[$i - 1]['title'] ?></li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
