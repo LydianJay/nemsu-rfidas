@@ -16,9 +16,9 @@
                         <?php foreach ($data as $d) { ?>
                             <tr class="clickable" onclick="window.location.href=`<?php echo site_url('userinfo') . '/' . $d->rfid; ?>`;">
                                 <th> <?php echo strtoupper(dechex($d->rfid)) ?> </th>
+                                <th> <?php echo $d->lname ?> </th>
                                 <th> <?php echo $d->fname ?> </th>
                                 <th> <?php echo $d->mname ?> </th>
-                                <th> <?php echo $d->lname ?> </th>
                                 <th> <?php echo $d->gender == 1 ? 'Male' : 'Female' ?> </th>
                                 <th> <?php echo $d->course_name ?> </th>
                                 <th> <?php echo $d->nstp_name ?> </th>

@@ -9,7 +9,7 @@ class Registration extends BaseController
 
     public function __construct()
     {
-        $this->private_data['table_head']  = ['RFID', 'First', 'Middle', 'Last', 'Gender', 'Course', 'NSTP', 'Section'];
+        $this->private_data['table_head']  = ['RFID', 'Last', 'First', 'Middle', 'Gender', 'Course', 'NSTP', 'Section'];
     }
 
     private function getstudents() 
