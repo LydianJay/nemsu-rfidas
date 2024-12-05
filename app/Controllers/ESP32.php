@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use DateTime;
+
 class ESP32 extends BaseController
 {
 
@@ -29,6 +31,13 @@ class ESP32 extends BaseController
         $day    = $splite[1];
         $year   = $splite[2];
 
+        $start_time     = new DateTime("07:20"); 
+        $end_time       = new DateTime("11:00");   
+        $current_time   = new DateTime();
+
+
+        $afternoon_start_time     = new DateTime("01:00");
+        $afternoon_end_time       = new DateTime("16:00");
 
         $isValid = $this->db->table('students')
         ->selectCount('rfid')
@@ -38,9 +47,7 @@ class ESP32 extends BaseController
 
 
         if($isValid[0]->rfid <= 0)  {
-
             return $this->response->setJSON(['status' => -1, 'msg' => 'Unregistered ID', 'user' => ' ']);
-        
         }
 
 
@@ -74,7 +81,32 @@ class ESP32 extends BaseController
             
 
             $type = $checkIns->rfid >= 1 ? 0 : 1;
-            
+
+            if ($type == 1 && !($current_time >= $start_time && $current_time <= $end_time)) {
+                return $this->response
+                    ->setJSON(
+                        [
+                            'status'    => 'OK',
+                            'msg'       => 'Too Late/Early',
+                            'user'      => $userInfo->fname . ' ' . $userInfo->lname
+                        ]
+                    );
+            }
+
+
+            if ($type == 0 && !($current_time >= $afternoon_start_time && $current_time <= $afternoon_end_time)) {
+                return $this->response
+                    ->setJSON(
+                        [
+                            'status'    => 'OK',
+                            'msg'       => 'Too Late/Early',
+                            'user'      => $userInfo->fname . ' ' . $userInfo->lname
+                        ]
+                    );
+            }
+
+
+
             $d = [
                 'rfid'      => $data->rfid,
                 'day'       => $day,
@@ -86,6 +118,10 @@ class ESP32 extends BaseController
 
             $this->db->table('attendance')->insert($d);
 
+
+            
+
+            
 
 
             return $this->response
