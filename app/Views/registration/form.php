@@ -46,7 +46,7 @@
                     </div>
 
 
-                    <div class="row">
+                    <div class="row mt-2 mb-4 border-top border-bottom py-3">
 
                         <div class="col">
                             <div class="form-floating mt-3">
@@ -76,6 +76,18 @@
                         </div>
                         <div class="col-2">
                             <div class="form-floating mt-3">
+                                <select class="form-select" id="floatingSelect" name="platoon">
+
+                                    <?php for ($i = 1; $i <= 10; $i++) { ?>
+                                        <option value="<?php echo $i ?>">Platoon <?php echo chr($i) ?></option>
+                                    <?php  } ?>
+
+                                </select>
+                                <label for="floatingSelect">Platoon</label>
+                            </div>
+                        </div>
+                        <div class="col-1">
+                            <div class="form-floating mt-3">
                                 <select class="form-select" id="floatingSelect" name="gender">
                                     <option selected="1">Male</option>
                                     <option value="0">Female</option>
@@ -96,6 +108,9 @@
                                 <label for="floatingSelect">Section</label>
                             </div>
                         </div>
+
+
+
 
 
                     </div>

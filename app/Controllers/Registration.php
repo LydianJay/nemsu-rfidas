@@ -97,6 +97,7 @@ class Registration extends BaseController
             'nstpID',
             'gender',
             'section',
+            'platoon',
         ];
 
 
