@@ -1,6 +1,20 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
+            <?php
+            $msg = session()->getFlashdata('msg');
+            if (isset($msg)) {
+            ?>
+
+
+                <div class="card-header">
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <?php echo $msg ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+
+            <?php } ?>
             <div class="card-body" id="pdfContent">
                 <h5 class="card-title">Students</h5>
                 <table class="table table-striped datatable" id="mytable">

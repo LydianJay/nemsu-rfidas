@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use PhpParser\Node\Expr\FuncCall;
+
 class Registration extends BaseController
 {
 
@@ -58,6 +60,9 @@ class Registration extends BaseController
     public function userinfo($rfid)
     {
 
+        $this->getCourses();
+        $this->getNSTP();
+
         $studentInfo = $this->db->table('students')
         ->where('rfid', $rfid)
         ->get()
@@ -75,6 +80,9 @@ class Registration extends BaseController
         ->getResult()[0];
 
 
+        
+        $birthdate = sprintf('%04d-%02d-%02d', $studentInfo->byear, $studentInfo->bmonth, $studentInfo->bday);
+        $this->private_data['birthdate'] = $birthdate;
         $this->private_data['student']      = $studentInfo;
         $this->private_data['nstp']         = $nstp;
         $this->private_data['course']       = $course;
@@ -113,9 +121,9 @@ class Registration extends BaseController
         $birthdate  = $this->request->getPost('birthdate');
         $trim       = explode('-', $birthdate);
 
-        $day        = $trim[0];
+        $day        = $trim[2];
         $month      = $trim[1];
-        $year       = $trim[2];
+        $year       = $trim[0];
 
 
         $postdata['bday']       = $day;
@@ -127,5 +135,52 @@ class Registration extends BaseController
         $this->db->table('students')->insert($postdata);
 
         return redirect()->to(site_url('registration/form'));
+    }
+
+
+    public function update() 
+    {
+        $postmap = [
+            'fname',
+            'lname',
+            'mname',
+            'rfid',
+            'courseID',
+            'nstpID',
+            'gender',
+            'section',
+            'platoon',
+        ];
+
+        $postdata = [];
+
+        foreach ($postmap as $p) {
+            $data = $this->request->getPost($p);
+            $postdata[$p] = $data;
+            session()->setFlashdata($p, $data);
+        }
+
+        $birthdate  = $this->request->getPost('birthdate');
+        $rfid       = $this->request->getPost('orig_rfid');
+        $trim       = explode('-', $birthdate);
+
+        $day        = $trim[2];
+        $month      = $trim[1];
+        $year       = $trim[0];
+
+
+        $postdata['bday']       = $day;
+        $postdata['bmonth']     = $month;
+        $postdata['byear']      = $year;
+
+        echo $birthdate;
+
+        $this->db->table('students')
+        ->where('rfid', $rfid)
+        ->set($postdata)
+        ->update();
+
+        session()->setFlashdata('msg', 'Update Complete');
+        return redirect()->to(site_url('registration'));
     }
 }
