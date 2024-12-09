@@ -63,6 +63,10 @@
             color: var(--bs-gray-800);
             font-weight: bold;
         }
+
+        td {
+            text-align: center;
+        }
     </style>
 
     <!-- =======================================================
