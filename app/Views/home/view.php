@@ -8,6 +8,55 @@
 
                 <form action="" method="get" class="my-5">
                     <div class="row">
+
+                        <div class="col-4">
+                            <div class="form-floating mt-3">
+                                <select class="form-select" id="floatingSelect" name="course">
+
+                                    <?php if (isset($course)) { ?>
+
+                                        <?php foreach ($courses as $c) { ?>
+                                            <option value="<?php echo $c->id; ?>" <?php echo $course == $c->id ? 'selected' : '' ?>><?php echo $c->name ?></option>
+                                        <?php  } ?>
+
+                                    <?php } else { ?>
+
+                                        <?php foreach ($courses as $c) { ?>
+                                            <option value="<?php echo $c->id; ?>"><?php echo $c->name ?></option>
+                                        <?php  } ?>
+
+                                    <?php } ?>
+
+
+
+                                </select>
+                                <label for="floatingSelect">Course</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-floating mt-3">
+                                <select class="form-select" id="floatingSelect" name="nstp">
+
+                                    <?php if (isset($nstp)) { ?>
+
+                                        <?php foreach ($nstp_courses as $c) { ?>
+                                            <option value="<?php echo $c->id; ?>" <?php echo $course == $c->id ? 'selected' : '' ?>><?php echo $c->name ?></option>
+                                        <?php  } ?>
+
+                                    <?php } else { ?>
+
+                                        <?php foreach ($nstp_courses as $c) { ?>
+                                            <option value="<?php echo $c->id; ?>"><?php echo $c->name ?></option>
+                                        <?php  } ?>
+
+                                    <?php } ?>
+
+
+
+                                </select>
+                                <label for="floatingSelect">NSTP</label>
+                            </div>
+                        </div>
                         <div class="col-2">
                             <div class="form-floating mt-3">
                                 <select class="form-select" id="floatingSelect" name="month">
@@ -18,9 +67,9 @@
                                         <?php  } ?>
                                     <?php } else { ?>
 
-                                    <?php for ($i = 1; $i <= 12; $i++) { ?>
-                                        <option value="<?php echo $i; ?>" <?php echo date('n') === $i ? '' : 'selected'; ?>><?php echo date('M', mktime(0, 0, 0, $i)) ?></option>
-                                    <?php  } ?>
+                                        <?php for ($i = 1; $i <= 12; $i++) { ?>
+                                            <option value="<?php echo $i; ?>" <?php echo date('n') === $i ? '' : 'selected'; ?>><?php echo date('M', mktime(0, 0, 0, $i)) ?></option>
+                                        <?php  } ?>
 
                                     <?php } ?>
 
@@ -28,10 +77,14 @@
                                 <label for="floatingSelect">Month</label>
                             </div>
                         </div>
+
+                    </div>
+                    <div class="row mt-3">
                         <div class="col-2">
-                            <button class="btn btn-primary btn-sm" type="submit"><?php echo $month ?></button>
+                            <button class="btn btn-primary btn-sm" type="submit">Apply Filter</button>
                         </div>
                     </div>
+
                 </form>
 
 
@@ -46,26 +99,55 @@
                         </tr>
                     </thead>
                     <tbody>
-
+                        <?php $last = null; ?>
                         <?php foreach ($data as $d) { ?>
-                            <tr>
-                                <th> <?php echo strtoupper(dechex($d->rfid)) ?> </th>
-                                <th> <?php echo $d->lname ?> </th>
-                                <th> <?php echo $d->fname ?> </th>
-                                <th> <?php echo $d->mname ?> </th>
-                                <th> <?php echo $d->gender == 1 ? 'Male' : 'Female' ?> </th>
-                                <th> <?php echo $d->course_name ?> </th>
-                                <th> <?php echo $d->nstp_name ?> </th>
-                                <th> <?php echo $d->platoon ?> </th>
-                                <?php
-                                for ($i = 0; $i < 12; $i++) {
-                                ?>
-                                    <th> <?php echo in_array($d->day, $saturdays) ? 'P' : 'A'; ?> </th>
-                                <?php } ?>
 
-                            </tr>
+                            <?php if ($last != $d->rfid) { ?>
+                                <tr>
+                                    <th> <?php echo strtoupper(dechex($d->rfid)) ?> </th>
+                                    <th> <?php echo $d->lname ?> </th>
+                                    <th> <?php echo $d->fname ?> </th>
+                                    <th> <?php echo $d->mname ?> </th>
+                                    <th> <?php echo $d->gender == 1 ? 'Male' : 'Female' ?> </th>
+                                    <th> <?php echo $d->course_name ?> </th>
+                                    <th> <?php echo $d->nstp_name ?> </th>
+                                    <th> <?php echo $d->platoon ?> </th>
+                                    <?php $idx = 0; ?>
+                                    <?php foreach ($saturdays as $s) { ?>
+
+
+                                        <?php if (isset($grouped[$d->rfid][intval($s)])) { ?>
+                                            <?php $t = $grouped[$d->rfid][intval($s)]; ?>
+                                            <th>
+                                                <?php if (isset($t[0])) {  ?>
+                                                    <i class="bi bi-check text-success fs-2"></i>
+                                                <?php } else { ?>
+                                                    <i class="bi bi-x text-danger fs-2"></i>
+                                                <?php } ?>
+                                            </th>
+                                            <th>
+                                                <?php if (isset($t[1])) {  ?>
+                                                    <i class="bi bi-check text-success fs-2"></i>
+                                                <?php } else { ?>
+                                                    <i class="bi bi-x text-danger fs-2"></i>
+                                                <?php } ?>
+                                            </th>
+                                        <?php } else { ?>
+                                            <th> <i class="bi bi-x text-danger fs-2"></i> </th>
+                                            <th> <i class="bi bi-x text-danger fs-2"></i> </th>
+                                        <?php } ?>
+
+                                    <?php } ?>
+
+
+
+
+
+                                    <?php $last = $d->rfid; ?>
+
+                                </tr>
+                            <?php } ?>
                         <?php } ?>
-
                     </tbody>
 
                 </table>

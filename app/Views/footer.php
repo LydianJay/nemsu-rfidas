@@ -66,24 +66,43 @@
         var rows = document.querySelectorAll("table#" + table_id + " tr");
         // Construct csv
         var csv = [];
-        //looping through the table
+        // Looping through the table
         for (var i = 0; i < rows.length; i++) {
             var row = [],
                 cols = rows[i].querySelectorAll("td, th");
-            //looping through the tr
+            // Looping through the tr
             for (var j = 0; j < cols.length; j++) {
-                // removing space from the data
-                var data = cols[j].innerText.replace(/(\r\n|\n|\r)/gm, "").replace(/(\s\s)/gm, " ")
-                // removing double qoute from the data
+                var cell = cols[j];
+                var data = "";
+
+                // Check for icons and replace them with appropriate text
+                if (cell.querySelector("i") || cell.querySelector("svg")) {
+                    // Example logic to handle font-awesome or custom icons
+                    if (cell.innerHTML.includes("bi-check") || cell.innerHTML.includes("checkmark")) {
+                        data = "O";
+                    } else if (cell.innerHTML.includes("bi-x") || cell.innerHTML.includes("x")) {
+                        data = "X";
+                    } else {
+                        data = ""; // Default for unrecognized icons
+                    }
+                } else {
+                    // If no icons, get text content
+                    data = cell.innerText;
+                }
+
+                // Remove extra whitespace and escape double quotes
+                data = data.replace(/(\r\n|\n|\r)/gm, "").replace(/(\s\s)/gm, " ");
                 data = data.replace(/"/g, `""`);
+
                 // Push escaped string
                 row.push(`"` + data + `"`);
             }
             csv.push(row.join(separator));
         }
         var csv_string = csv.join("\n");
+
         // Download it
-        var filename = "export_" + table_id + "_" + new Date().toLocaleDateString() + ".csv";
+        var filename = "attendance_" + "<?php echo date('F-Y') ?>" + ".csv";
         var link = document.createElement("a");
         link.style.display = "none";
         link.setAttribute("target", "_blank");

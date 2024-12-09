@@ -10,7 +10,7 @@ class Home extends BaseController
     {
         $header = ['RFID', 'Last', 'First', 'Middle', 'Gender', 'Course', 'NSTP', 'Platoon'];
 
-        for ($i = 0; $i < 6; $i++) {
+        for ($i = 0; $i < 4; $i++) {
             $header[] = 'In';
             $header[] = 'Out';
         }
@@ -39,15 +39,42 @@ class Home extends BaseController
     }
 
 
-    private function get_attendance($month)
+    private function get_attendance($month, $courseID, $nstpID)
     {
-        $this->private_data['data'] = $this->db
+        $builder = $this->db
         ->table('attendance')
-        ->select('*, course.id as course_id, nstp_course.name as nstp_name, course.name as course_name')
+        ->select("*, course.id as course_id, nstp_course.name as nstp_name, course.name as course_name, attendance.rfid as rfid")
         ->join('students', 'attendance.rfid = students.rfid')
         ->join('course','students.courseID = course.id')
         ->join('nstp_course','students.nstpID = nstp_course.id')
-        ->where('month', $month)
+        
+        ->orderBy('attendance.rfid, day');
+       
+
+        $builder->where('month', $month);
+    
+        if($courseID != null) {
+            $builder->where('course.id', $courseID);
+        }
+
+        if ($nstpID != null) {
+            $builder->where('nstp_course.id', $nstpID);
+        }
+
+
+        $this->private_data['data'] = $builder->get()->getResult();
+    }
+
+
+    private function get_course()
+    {
+        $this->private_data['courses'] = $this->db
+        ->table('course')
+        ->get()
+        ->getResult();
+
+        $this->private_data['nstp_courses'] = $this->db
+        ->table('nstp_course')
         ->get()
         ->getResult();
     }
@@ -55,18 +82,39 @@ class Home extends BaseController
 
     public function index()
     {
-        $this->get_attendance();
         $this->data['index']    = 0;
         $this->private_data['saturdays'] = $this->get_saturdays();
-
+        
+        $this->get_course();
 
         // === Filter
         
         $month                          = $this->request->getGet('month');
+        $courseID                       = $this->request->getGet('course');
+        $nstpID                         = $this->request->getGet('nstp');
+        
+        $this->private_data['nstp']     = $nstpID;
         $this->private_data['month']    = $month;
+        $this->private_data['course']   = $courseID;
         if(isset($month)) {
-            
+            $this->get_attendance($month, $courseID, $nstpID);
         }
+        else {
+            $this->get_attendance(date('n'), $courseID, $nstpID);
+        }
+
+
+        $data       = $this->private_data['data'];
+        $grouped    = [];
+
+        foreach ($data as $d) {
+            if (!isset($grouped[$d->rfid][$d->day])) {
+                $grouped[$d->rfid][$d->day] = []; 
+            }
+            array_push($grouped[$d->rfid][$d->day], ['type' => $d->type]);            
+        }
+
+        $this->private_data['grouped'] = $grouped;
 
 
         echo view('header', $this->data);
