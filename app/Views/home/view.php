@@ -14,13 +14,13 @@
                                 <select class="form-select" id="floatingSelect" name="course">
 
                                     <?php if (isset($course)) { ?>
-
+                                        <option value="0">Unfilter</option>
                                         <?php foreach ($courses as $c) { ?>
                                             <option value="<?php echo $c->id; ?>" <?php echo $course == $c->id ? 'selected' : '' ?>><?php echo $c->name ?></option>
                                         <?php  } ?>
 
                                     <?php } else { ?>
-
+                                        <option value="0" selected>Unfilter</option>
                                         <?php foreach ($courses as $c) { ?>
                                             <option value="<?php echo $c->id; ?>"><?php echo $c->name ?></option>
                                         <?php  } ?>
@@ -36,11 +36,11 @@
                         <div class="col-4">
                             <div class="form-floating mt-3">
                                 <select class="form-select" id="floatingSelect" name="nstp">
-
+                                    <option value="0">Unfilter</option>
                                     <?php if (isset($nstp)) { ?>
 
                                         <?php foreach ($nstp_courses as $c) { ?>
-                                            <option value="<?php echo $c->id; ?>" <?php echo $course == $c->id ? 'selected' : '' ?>><?php echo $c->name ?></option>
+                                            <option value="<?php echo $c->id; ?>" <?php echo $nstp == $c->id ? 'selected' : '' ?>><?php echo $c->name ?></option>
                                         <?php  } ?>
 
                                     <?php } else { ?>
@@ -60,15 +60,17 @@
                         <div class="col-2">
                             <div class="form-floating mt-3">
                                 <select class="form-select" id="floatingSelect" name="month">
-
                                     <?php if (isset($month)) { ?>
+                                        <option value="0">Unfilter</option>
+
                                         <?php for ($i = 1; $i <= 12; $i++) { ?>
                                             <option value="<?php echo $i; ?>" <?php echo $month == $i ? 'selected' : ''; ?>> <?php echo date('M', mktime(0, 0, 0, $i)) ?> </option>
                                         <?php  } ?>
                                     <?php } else { ?>
+                                        <option value="0" selected>Unfilter</option>
 
                                         <?php for ($i = 1; $i <= 12; $i++) { ?>
-                                            <option value="<?php echo $i; ?>" <?php echo date('n') === $i ? '' : 'selected'; ?>><?php echo date('M', mktime(0, 0, 0, $i)) ?></option>
+                                            <option value="<?php echo $i; ?>" ><?php echo date('M', mktime(0, 0, 0, $i)) ?></option>
                                         <?php  } ?>
 
                                     <?php } ?>

@@ -49,9 +49,12 @@ class Home extends BaseController
         ->join('nstp_course','students.nstpID = nstp_course.id')
         
         ->orderBy('attendance.rfid, day');
-       
+        
 
-        $builder->where('month', $month);
+        if($month != null) {
+            $builder->where('month', $month);
+        }
+
     
         if($courseID != null) {
             $builder->where('course.id', $courseID);
@@ -89,10 +92,12 @@ class Home extends BaseController
 
         // === Filter
         
-        $month                          = $this->request->getGet('month');
-        $courseID                       = $this->request->getGet('course');
-        $nstpID                         = $this->request->getGet('nstp');
+        $month                          = $this->request->getGet('month')   == 0 ? null : $this->request->getGet('month');
+        $courseID                       = $this->request->getGet('course')  == 0 ? null : $this->request->getGet('course');
+        $nstpID                         = $this->request->getGet('nstp')    == 0 ? null : $this->request->getGet('nstp');
         
+
+
         $this->private_data['nstp']     = $nstpID;
         $this->private_data['month']    = $month;
         $this->private_data['course']   = $courseID;
