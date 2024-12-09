@@ -65,7 +65,11 @@
         }
 
         td {
-            text-align: center;
+            text-align: start;
+        }
+
+        th {
+            text-align: start;
         }
     </style>
 

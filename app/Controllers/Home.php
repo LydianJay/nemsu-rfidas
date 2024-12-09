@@ -39,7 +39,7 @@ class Home extends BaseController
     }
 
 
-    private function get_attendance($month, $courseID, $nstpID)
+    private function get_attendance($month, $courseID, $nstpID, $platoon)
     {
         $builder = $this->db
         ->table('attendance')
@@ -55,7 +55,10 @@ class Home extends BaseController
             $builder->where('month', $month);
         }
 
-    
+        if($platoon != null){
+            $builder->where('platoon', $platoon);
+        }
+
         if($courseID != null) {
             $builder->where('course.id', $courseID);
         }
@@ -95,17 +98,18 @@ class Home extends BaseController
         $month                          = $this->request->getGet('month')   == 0 ? null : $this->request->getGet('month');
         $courseID                       = $this->request->getGet('course')  == 0 ? null : $this->request->getGet('course');
         $nstpID                         = $this->request->getGet('nstp')    == 0 ? null : $this->request->getGet('nstp');
-        
+        $platoon                        = $this->request->getGet('platoon') == 0 ? null : $this->request->getGet('platoon');
 
 
         $this->private_data['nstp']     = $nstpID;
         $this->private_data['month']    = $month;
         $this->private_data['course']   = $courseID;
+        $this->private_data['plat']     = $platoon;
         if(isset($month)) {
-            $this->get_attendance($month, $courseID, $nstpID);
+            $this->get_attendance($month, $courseID, $nstpID, $platoon);
         }
         else {
-            $this->get_attendance(date('n'), $courseID, $nstpID);
+            $this->get_attendance(date('n'), $courseID, $nstpID, $platoon);
         }
 
 

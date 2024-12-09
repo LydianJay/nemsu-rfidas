@@ -79,7 +79,7 @@
                                 <select class="form-select" id="floatingSelect" name="platoon">
 
                                     <?php for ($i = 1; $i <= 10; $i++) { ?>
-                                        <option value="<?php echo $i ?>">Platoon <?php echo chr($i) ?></option>
+                                        <option value="<?php echo $i ?>"><?php $i ?></option>
                                     <?php  } ?>
 
                                 </select>
