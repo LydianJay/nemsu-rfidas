@@ -125,7 +125,7 @@
 
                                 <?php if ($last != $d->rfid) { ?>
                                     <tr>
-                                        <th> <?php echo strtoupper(strval(dechex(intval($d->rfid)))) ?> </th>
+                                        <th> <?php echo strtoupper($hex[$d->rfid]) ?> </th>
                                         <th> <?php echo $d->lname ?> </th>
                                         <th> <?php echo $d->fname ?> </th>
                                         <th> <?php echo $d->mname ?> </th>

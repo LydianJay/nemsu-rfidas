@@ -20,6 +20,17 @@ class Home extends BaseController
         $this->private_data['table_head']  = $header;
     }
 
+    private function bechex($number)
+    {
+        $hex = '';
+        while (bccomp($number, '0') > 0) {
+            $remainder = bcmod($number, '16');
+            $hex = dechex($remainder) . $hex;
+            $number = bcdiv($number, '16', 0);
+        }
+        return $hex ?: '0'; 
+    }
+
     private function get_saturdays()
     {
         $currentMonth = date('Y-m');
@@ -117,8 +128,11 @@ class Home extends BaseController
         $data       = $this->private_data['data'];
         $grouped    = [];
         $total      = [];
+        $hex        = [];
 
         foreach ($data as $d) {
+            
+            $hex[$d->rfid] = $this->bechex($d->rfid);
             if (!isset($grouped[$d->rfid][$d->day])) {
                 $grouped[$d->rfid][$d->day] = []; 
             }
@@ -133,6 +147,7 @@ class Home extends BaseController
 
         $this->private_data['grouped']  = $grouped;
         $this->private_data['total']    = $total;
+        $this->private_data['hex']      = $hex;
 
 
         echo view('header', $this->data);

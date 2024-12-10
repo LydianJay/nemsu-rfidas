@@ -36,12 +36,27 @@ class Registration extends BaseController
         $this->private_data['nstp_courses'] = $this->db->table('nstp_course')->get()->getResult();
     }
 
-
+    private function bechex($number)
+    {
+        $hex = '';
+        while (bccomp($number, '0') > 0) {
+            $remainder = bcmod($number, '16');
+            $hex = dechex($remainder) . $hex;
+            $number = bcdiv($number, '16', 0);
+        }
+        return $hex ?: '0';
+    }
     public function index()
     {
 
         $this->getstudents();
         $this->data['index']    = 1;
+        $students               = $this->private_data['data'];
+        $hex = [];
+        foreach($students as $s) {
+            $hex[$s->rfid]  = $this->bechex($s->rfid);
+        }
+        $this->private_data['hex']  = $hex;
         echo view('header', $this->data);
         echo view('registration/view', $this->private_data);
         echo view('footer');
