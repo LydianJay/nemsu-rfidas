@@ -4,7 +4,7 @@
             <div class="card-header">
                 <h5 class="card-title">Attendance</h5>
             </div>
-            <div class="card-body" id="pdfContent">
+            <div class="card-body">
 
                 <form action="" method="get" class="my-5">
                     <div class="row">
@@ -90,7 +90,7 @@
                                     <?php } else { ?>
 
                                         <?php for ($i = 1; $i <= 12; $i++) { ?>
-                                            <option value="<?php echo $i; ?>" <?php echo date('n') == $i ? 'selected' : ''; ?> ><?php echo date('M', mktime(0, 0, 0, $i)) ?></option>
+                                            <option value="<?php echo $i; ?>" <?php echo date('n') == $i ? 'selected' : ''; ?>><?php echo date('M', mktime(0, 0, 0, $i)) ?></option>
                                         <?php  } ?>
 
                                     <?php } ?>
@@ -109,73 +109,79 @@
 
                 </form>
 
+                <div class="row">
+                    <table class="table table-striped datatable border-top" id="mytable">
+                        <thead>
+                            <tr>
+                                <?php foreach ($table_head as $head) { ?>
+                                    <th> <?php echo $head ?> </th>
+
+                                <?php } ?>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $last = null; ?>
+                            <?php foreach ($data as $d) { ?>
+
+                                <?php if ($last != $d->rfid) { ?>
+                                    <tr>
+                                        <th> <?php echo strtoupper(strval(dechex(intval($d->rfid)))) ?> </th>
+                                        <th> <?php echo $d->lname ?> </th>
+                                        <th> <?php echo $d->fname ?> </th>
+                                        <th> <?php echo $d->mname ?> </th>
+                                        <th> <?php echo $d->gender == 1 ? 'Male' : 'Female' ?> </th>
+                                        <th> <?php echo $d->course_name ?> </th>
+                                        <th> <?php echo $d->nstp_name ?> </th>
+                                        <th> <?php echo $d->platoon == 0 ? 'N/A' : $d->platoon ?> </th>
+
+                                        <?php $idx = 0; ?>
+                                        <?php foreach ($saturdays as $s) { ?>
 
 
-                <table class="table table-striped datatable border-top" id="mytable">
-                    <thead>
-                        <tr>
-                            <?php foreach ($table_head as $head) { ?>
-                                <th> <?php echo $head ?> </th>
+                                            <?php if (isset($grouped[$d->rfid][intval($s)])) { ?>
+                                                <?php $t = $grouped[$d->rfid][intval($s)]; ?>
+                                                <th>
+                                                    <?php if (isset($t[0])) {  ?>
+                                                        <i class="bi bi-check text-success fs-2"></i>
+                                                    <?php } else { ?>
+                                                        <i class="bi bi-x text-danger fs-2"></i>
+                                                    <?php } ?>
+                                                </th>
+                                                <th>
+                                                    <?php if (isset($t[1])) {  ?>
+                                                        <i class="bi bi-check text-success fs-2"></i>
+                                                    <?php } else { ?>
+                                                        <i class="bi bi-x text-danger fs-2"></i>
+                                                    <?php } ?>
+                                                </th>
+                                            <?php } else { ?>
+                                                <th> <i class="bi bi-x text-danger fs-2"></i> </th>
+                                                <th> <i class="bi bi-x text-danger fs-2"></i> </th>
+                                            <?php } ?>
 
-                            <?php } ?>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $last = null; ?>
-                        <?php foreach ($data as $d) { ?>
-
-                            <?php if ($last != $d->rfid) { ?>
-                                <tr>
-                                    <th> <?php echo strtoupper(dechex($d->rfid)) ?> </th>
-                                    <th> <?php echo $d->lname ?> </th>
-                                    <th> <?php echo $d->fname ?> </th>
-                                    <th> <?php echo $d->mname ?> </th>
-                                    <th> <?php echo $d->gender == 1 ? 'Male' : 'Female' ?> </th>
-                                    <th> <?php echo $d->course_name ?> </th>
-                                    <th> <?php echo $d->nstp_name ?> </th>
-                                    <th> <?php echo $d->platoon ?> </th>
-                                    <?php $idx = 0; ?>
-                                    <?php foreach ($saturdays as $s) { ?>
-
-
-                                        <?php if (isset($grouped[$d->rfid][intval($s)])) { ?>
-                                            <?php $t = $grouped[$d->rfid][intval($s)]; ?>
-                                            <th>
-                                                <?php if (isset($t[0])) {  ?>
-                                                    <i class="bi bi-check text-success fs-2"></i>
-                                                <?php } else { ?>
-                                                    <i class="bi bi-x text-danger fs-2"></i>
-                                                <?php } ?>
-                                            </th>
-                                            <th>
-                                                <?php if (isset($t[1])) {  ?>
-                                                    <i class="bi bi-check text-success fs-2"></i>
-                                                <?php } else { ?>
-                                                    <i class="bi bi-x text-danger fs-2"></i>
-                                                <?php } ?>
-                                            </th>
-                                        <?php } else { ?>
-                                            <th> <i class="bi bi-x text-danger fs-2"></i> </th>
-                                            <th> <i class="bi bi-x text-danger fs-2"></i> </th>
                                         <?php } ?>
 
-                                    <?php } ?>
+
+                                        <th> <?php echo $total[$d->rfid] ?> </th>
 
 
+                                        <?php $last = $d->rfid; ?>
 
-
-
-                                    <?php $last = $d->rfid; ?>
-
-                                </tr>
+                                    </tr>
+                                <?php } ?>
                             <?php } ?>
-                        <?php } ?>
-                    </tbody>
+                        </tbody>
 
-                </table>
+                    </table>
+                </div>
+
+
             </div>
             <div class="card-footer">
-                <button class="btn btn-primary btn-sm" onclick="tocsv()">CSV</button>
+                <div class="container-fluid d-flex flex-row justify-content-between">
+                    <button class="btn btn-primary btn-sm" onclick="tocsv()">CSV</button>
+                    <button class="btn btn-success btn-sm" id="download">PDF</button>
+                </div>
             </div>
         </div>
     </div>

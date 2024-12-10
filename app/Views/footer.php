@@ -31,7 +31,7 @@
 <script>
     document.getElementById('download').addEventListener('click', async function() {
         console.log('Clicked!');
-        let elem = document.getElementById('pdfContent');
+        let elem = document.getElementById('mytable');
 
 
         let fname = "form";

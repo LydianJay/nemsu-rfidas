@@ -77,9 +77,9 @@
                         <div class="col-2">
                             <div class="form-floating mt-3">
                                 <select class="form-select" id="floatingSelect" name="platoon">
-
+                                    <option value="0">N/A</option>
                                     <?php for ($i = 1; $i <= 10; $i++) { ?>
-                                        <option value="<?php echo $i ?>"><?php $i ?></option>
+                                        <option value="<?php echo $i ?>"><?php echo $i ?></option>
                                     <?php  } ?>
 
                                 </select>

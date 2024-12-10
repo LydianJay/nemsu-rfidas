@@ -14,6 +14,7 @@ class Home extends BaseController
             $header[] = 'In';
             $header[] = 'Out';
         }
+        $header[] = 'Total';
 
 
         $this->private_data['table_head']  = $header;
@@ -115,15 +116,23 @@ class Home extends BaseController
 
         $data       = $this->private_data['data'];
         $grouped    = [];
+        $total      = [];
 
         foreach ($data as $d) {
             if (!isset($grouped[$d->rfid][$d->day])) {
                 $grouped[$d->rfid][$d->day] = []; 
             }
+
+            if(!isset($total[$d->rfid])){
+                $total[$d->rfid] = 0;
+            }
+
             array_push($grouped[$d->rfid][$d->day], ['type' => $d->type]);            
+            $total[$d->rfid] += 0.5;
         }
 
-        $this->private_data['grouped'] = $grouped;
+        $this->private_data['grouped']  = $grouped;
+        $this->private_data['total']    = $total;
 
 
         echo view('header', $this->data);
