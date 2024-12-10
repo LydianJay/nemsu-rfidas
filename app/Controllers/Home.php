@@ -51,6 +51,9 @@ class Home extends BaseController
     }
 
 
+    
+
+
     private function get_attendance($month, $courseID, $nstpID, $platoon)
     {
         $builder = $this->db
@@ -153,5 +156,12 @@ class Home extends BaseController
         echo view('header', $this->data);
         echo view('home/view', $this->private_data);
         echo view ('footer');
+    }
+
+
+    public function logout()
+    {
+
+        return redirect()->to(site_url(''));
     }
 }

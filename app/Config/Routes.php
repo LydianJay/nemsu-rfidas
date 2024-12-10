@@ -16,11 +16,15 @@ $routes->get('/home', 'Home::index');
 // In Development
 $routes->get('/indev', 'Maintainance::index');
 
+// Settings
+$routes->get('/settings', 'Settings::index');
+$routes->post('/update',  'Settings::update');
 
 // ESP32
 $routes->post('/insert', 'ESP32::insert');
 // $routes->get('/insert', 'ESP32::insert');
 
+$routes->get('/logout', 'Home::logout');
 
 // ============= Students ==================
 $routes->get('/registration',           'Registration::index');

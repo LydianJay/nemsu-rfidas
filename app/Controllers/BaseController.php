@@ -73,6 +73,12 @@ abstract class BaseController extends Controller
                 'uri'   => 'registration'
             ],
 
+            [
+                'icon'  => 'bi bi-gear-fill',
+                'title' => 'Settings',
+                'uri'   => 'settings'
+            ],
+
         ];
     }
 

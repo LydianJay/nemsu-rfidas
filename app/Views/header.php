@@ -122,36 +122,22 @@
 
             <?php }  ?>
 
-            <!-- <li class="nav-item">
-                <a class="nav-link collapsed" href="<?php echo base_url() . 'home' ?>">
-                    <i class="bi bi-grid"></i>
-                    <span>Attendance</span>
+
+        </ul>
+        <li class="nav-heading mt-5 mb-2">Other</li>
+        <ul class="sidebar-nav" id="sidebar-nav">
+
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="<?php echo base_url() . 'logout' ?>">
+                    <i class="bi bi-gear"></i>
+                    <span>Logout</span>
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="<?php echo base_url() . 'home' ?>">
-                    <i class="bi bi-grid"></i>
-                    <span>Students</span>
-                </a>
-            </li> -->
-
-
-
-
-
-            <li class="nav-heading">Admin</li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="<?php echo base_url() . 'indev' ?>">
-                    <i class="bi bi-gear-fill"></i>
-                    <span>Settings</span>
-                </a>
-            </li><!-- End Profile Page Nav -->
-
-
 
         </ul>
+
 
     </aside><!-- End Sidebar-->
 
@@ -163,7 +149,7 @@
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="<?php echo base_url() . 'home' ?>">Home</a></li>
-                    <li class="breadcrumb-item active"><?php echo $modules[$i - 1]['title'] ?></li>
+                    <li class="breadcrumb-item active"><?php echo $modules[$index]['title'] ?></li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
