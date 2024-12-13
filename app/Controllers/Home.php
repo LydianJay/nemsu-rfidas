@@ -57,8 +57,8 @@ class Home extends BaseController
         $currentDate = date('Y-m-d'); // Current date in 'Y-m-d' format
         $threeDays = [];
 
-        for ($i = 0; $i < 3; $i++) {
-            $threeDays[] = date('Y-m-d', strtotime("+$i day", strtotime($currentDate)));
+        for ($i = 0; $i < 4; $i++) {
+            $threeDays[] = date('d', strtotime("+$i day", strtotime($currentDate)));
         }
 
         return $threeDays;
