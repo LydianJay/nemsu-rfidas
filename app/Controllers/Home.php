@@ -51,6 +51,19 @@ class Home extends BaseController
     }
 
 
+    // Temp function --- FOR DEBUG ONLY ---
+    private function get_next_three_days()
+    {
+        $currentDate = date('Y-m-d'); // Current date in 'Y-m-d' format
+        $threeDays = [];
+
+        for ($i = 0; $i < 3; $i++) {
+            $threeDays[] = date('Y-m-d', strtotime("+$i day", strtotime($currentDate)));
+        }
+
+        return $threeDays;
+    }
+
     
 
 
@@ -104,7 +117,8 @@ class Home extends BaseController
     public function index()
     {
         $this->data['index']    = 0;
-        $this->private_data['saturdays'] = $this->get_saturdays();
+        $this->private_data['saturdays']    = $this->get_next_three_days(); // For DEBUG only!
+        // $this->private_data['saturdays']    = $this->get_saturdays(); // Disabled Temporarily 
         
         $this->get_course();
 

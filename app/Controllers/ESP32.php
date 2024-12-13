@@ -81,28 +81,28 @@ class ESP32 extends BaseController
 
             $type = $checkIns->rfid >= 1 ? 0 : 1;
 
-            if ($type == 1 && !($current_time >= $start_time && $current_time <= $end_time)) {
-                return $this->response
-                    ->setJSON(
-                        [
-                            'status'    => 'OK',
-                            'msg'       => 'Too Late/Early',
-                            'user'      => $userInfo->fname . ' ' . $userInfo->lname
-                        ]
-                    );
-            }
+            // if ($type == 1 && !($current_time >= $start_time && $current_time <= $end_time)) {
+            //     return $this->response
+            //         ->setJSON(
+            //             [
+            //                 'status'    => 'OK',
+            //                 'msg'       => 'Too Late/Early',
+            //                 'user'      => $userInfo->fname . ' ' . $userInfo->lname
+            //             ]
+            //         );
+            // }
 
 
-            if ($type == 0 && !($current_time >= $afternoon_start_time && $current_time <= $afternoon_end_time)) {
-                return $this->response
-                    ->setJSON(
-                        [
-                            'status'    => 'OK',
-                            'msg'       => 'Too Late/Early',
-                            'user'      => $userInfo->fname . ' ' . $userInfo->lname
-                        ]
-                    );
-            }
+            // if ($type == 0 && !($current_time >= $afternoon_start_time && $current_time <= $afternoon_end_time)) {
+            //     return $this->response
+            //         ->setJSON(
+            //             [
+            //                 'status'    => 'OK',
+            //                 'msg'       => 'Too Late/Early',
+            //                 'user'      => $userInfo->fname . ' ' . $userInfo->lname
+            //             ]
+            //         );
+            // }
 
 
 
