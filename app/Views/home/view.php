@@ -180,7 +180,7 @@
             <div class="card-footer">
                 <div class="container-fluid d-flex flex-row justify-content-between">
                     <button class="btn btn-primary btn-sm" onclick="tocsv()">CSV</button>
-                    <button class="btn btn-success btn-sm" id="download">PDF</button>
+                    <!-- <button class="btn btn-success btn-sm" id="download">PDF</button> -->
                 </div>
             </div>
         </div>

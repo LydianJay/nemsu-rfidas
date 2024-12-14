@@ -1,4 +1,4 @@
-<p class="fs-5 fw-bold text-secondary text-center">This project is still in development</p>
+<!-- <p class="fs-5 fw-bold text-secondary text-center">This project is still in development</p> -->
 </section>
 </main><!-- End #main -->
 
@@ -10,7 +10,7 @@
     <div class="credits">
         
         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
-    </div>
+    <!-- </div> -->
 </footer><!-- End Footer -->
 
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

@@ -89,7 +89,7 @@
                         <div class="col-1">
                             <div class="form-floating mt-3">
                                 <select class="form-select" id="floatingSelect" name="gender">
-                                    <option selected="1">Male</option>
+                                    <option value="1" selected>Male</option>
                                     <option value="0">Female</option>
                                 </select>
                                 <label for="floatingSelect">Gender</label>
