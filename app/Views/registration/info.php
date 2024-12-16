@@ -105,10 +105,22 @@
 
 
 
-                    <div class="container-fluid d-flex flex-row flex-start mt-5">
+                    <div class="container-fluid d-flex flex-row flex-start justify-content-between mt-5">
                         <button class="btn btn-success btn-sm" type="submit">Update</button>
                     </div>
+
+
                 </form>
+
+                <form action="<?php echo base_url() . "delete/$rfid" ?>" method="get">
+                    <div class="container-fluid d-flex flex-row justify-content-between mt-2">
+                        <button class="btn btn-danger btn-sm" onclick="window.location.href=`<?php echo site_url('delete') . '/' . $rfid; ?>`;">Delete</button>
+                    </div>
+                </form>
+
+
+
+
 
 
 

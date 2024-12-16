@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use PhpParser\Node\Expr\FuncCall;
 
 class Registration extends BaseController
 {
@@ -97,10 +96,11 @@ class Registration extends BaseController
 
         
         $birthdate = sprintf('%04d-%02d-%02d', $studentInfo->byear, $studentInfo->bmonth, $studentInfo->bday);
-        $this->private_data['birthdate'] = $birthdate;
+        $this->private_data['birthdate']    = $birthdate;
         $this->private_data['student']      = $studentInfo;
         $this->private_data['nstp']         = $nstp;
         $this->private_data['course']       = $course;
+        $this->private_data['rfid']         = $rfid;
         
         
         $this->data['index']    = 1;
@@ -152,6 +152,19 @@ class Registration extends BaseController
         return redirect()->to(site_url('registration/form'));
     }
 
+
+    public function delete($rfid)
+    {
+
+        $this->db
+        ->table('students')
+        ->where('rfid', $rfid)
+        ->delete();
+
+        session()->setFlashdata('msg', 'User Removed');
+        return redirect()->to(site_url('registration'));
+
+    }
 
     public function update() 
     {

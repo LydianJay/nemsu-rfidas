@@ -32,3 +32,4 @@ $routes->get('/registration/form',      'Registration::form');
 $routes->post('/registration/update',   'Registration::update');
 $routes->post('/register',              'Registration::register');
 $routes->get('/userinfo/(:num)',        'Registration::userinfo/$1');
+$routes->get('/delete/(:num)',          'Registration::delete/$1');
